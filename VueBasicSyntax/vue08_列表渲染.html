@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+      window.onload = function () {
+        createApp({
+          setup() {
+            const data1 = ref(["Apple", "Orange", "Banana", "Pear"]);
+            const data2 = ref({
+              name: "Tom",
+              age: 22,
+              gender: "male",
+              address: "BeiJing",
+            });
+            const data3 = ref([
+              {
+                name: "Tom",
+                age: 22,
+                gender: "male",
+                address: "BeiJing",
+              },
+              {
+                name: "Jack",
+                age: 23,
+                gender: "male",
+                address: "ShangHai",
+              },
+              {
+                name: "Rose",
+                age: 52,
+                gender: "female",
+                address: "GuangZhou",
+              },
+            ]);
+            function addData() {
+              data3.value.splice(0, 0, {
+                id: "s04",
+                name: "Rony",
+                age: 26,
+                gender: "male",
+                address: "ShenZhen",
+              });
+            }
+            function changeData() {
+              data3.value[0].name = "ROSE-A";
+              data3.value[2].name = "TOM-A";
+            }
+            const data4 = ref([
+              {
+                id: "s01",
+                name: "Tom",
+                age: 22,
+                gender: "male",
+                address: "BeiJing",
+              },
+              {
+                id: "s02",
+                name: "Jack",
+                age: 23,
+                gender: "male",
+                address: "ShangHai",
+              },
+              {
+                id: "s03",
+                name: "Rose",
+                age: 52,
+                gender: "female",
+                address: "GuangZhou",
+              },
+            ]);
+
+            function addData() {
+              data4.value.splice(0, 0, {
+                id: "s04",
+                name: "Rony",
+                age: 26,
+                gender: "male",
+                address: "ShenZhen",
+              });
+            }
+            function changeData() {
+              data4.value[0].name = "ROSE-A";
+              data4.value[2].name = "TOM-A";
+            }
+            return {
+              data1,
+              data2,
+              data3,
+              data4,
+              addData,
+              changeData
+
+            };
+          },
+        }).mount("#app");
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <ul>
+          <!-- <li v-for="s in data1">{{s}}</li> -->
+        </ul>
+        <p v-for="s in data1">{{s}}</p>
+      </div>
+      <hr />
+      <div>
+        <p v-for="(s, ids) in data1">索引下标 {{ids}} 对应的值 是 {{s}}</p>
+      </div>
+      <hr />
+      <div>
+        <div v-for="value in data2">{{value}}</div>
+      </div>
+      <hr />
+      <div>
+        <div v-for="(value, key) in data2">
+          key: {{key}} -- Value: {{ value }}
+        </div>
+      </div>
+      <hr />
+      <div>
+        <div v-for="(value, key, index) in data2">
+          Index: {{index}} key: {{key}} -- Value: {{ value }}
+        </div>
+      </div>
+      <hr />
+      <div>
+        <div v-for="item in data3">
+          <h3>{{item.name}}</h3>
+          <div>
+            Age: <span>{{item.age}}</span> Gender: {{item.gender}} Address:
+            {{item.address}}
+          </div>
+        </div>
+      </div>
+      <ul>
+        <!-- <li v-for="(obj,index) in data3"> -->
+        <!-- <li v-for="(obj,index) in data4" :key="index"> -->
+        <li v-for="(obj,index) in data4" :key="obj.id"> 
+          <span>
+            第{{index + 1}}条数据：{{obj.id}} - {{obj.name}} - {{obj.age}} -
+            {{obj.gender}} - {{obj.address}}
+          </span>
+          ---
+          <span>
+            <input type="text" />
+          </span>
+        </li>
+      </ul>
+      <div>
+        <button @click="addData">添加数据</button> |
+        <button @click="changeData">修改数据</button>
+      </div>
+    </div>
+  </body>
+</html>

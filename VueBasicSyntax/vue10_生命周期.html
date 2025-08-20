@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+      const {
+        createApp,
+        ref,
+        onBeforeMount,
+        onBeforeUpdate,
+        onBeforeUnmount,
+        onMounted,
+        onUpdated,
+        onUnmounted,
+      } = Vue;
+      window.onload = function () {
+        const app = createApp({
+          setup() {
+            const num = ref(100);
+            // 在基础初始化完成之后，数据和事件配置之前调用
+            onBeforeMount(() => {
+              console.log("onBeforeMount");
+            });
+            // 初始化全部完成，实例创建完成后立即调用
+            onMounted(() => {
+              console.log("onMounted");
+            });
+            // 数据有更新，页面渲染之前调用
+            onBeforeUpdate(() => {
+              console.log("beforeUpdate");
+            });
+
+            // 数据有更新，页面渲染完毕后调用
+            onUpdated(() => {
+              console.log("updated");
+            });
+
+            // 实例销毁前调用
+            onBeforeUnmount(() => {
+              console.log("beforeDestroy");
+            });
+
+            // 实例销毁后调用
+            onUnmounted(() => {
+              console.log("destroyed");
+            });
+            return {
+              num,
+            };
+          },
+        });
+        app.mount("#app");
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{num}}</p>
+      <button @click="num++">修改</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+      const { createApp, ref, computed } = Vue;
+      window.onload = function () {
+        createApp({
+          setup() {
+            const firstName = ref("Michael");
+            const lastName = ref("Jordan");
+            // const fullName = computed(() => {
+            //   console.log("FullName Run..");
+            //   return firstName.value + "." + lastName.value;
+            // });
+            const fullName = computed({
+              get() {
+                return firstName.value + "." + lastName.value;
+              },
+              set(newValue) {
+                [firstName.value, lastName.value] = newValue.split(".");
+                console.log(firstName.value);
+                console.log(lastName.value);
+              },
+            });
+            function getFullName() {
+              console.log("GetFullName Run ..");
+              return firstName.value + "." + lastName.value;
+            }
+            // 事件响应函数
+            function changeFirstName() {
+              //   firstName.value += "A";
+              fullName.value = "AAA.BBB";
+            }
+            return {
+              firstName,
+              lastName,
+              fullName,
+              getFullName,
+              changeFirstName,
+            };
+          },
+        }).mount("#app");
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div>{{firstName}}.{{lastName}}</div>
+      <div>{{firstName + "." + lastName}}</div>
+      <div>{{fullName}}</div>
+      <div>{{getFullName()}}</div>
+      <div>
+        <div>计算属性：{{ fullName }}</div>
+        <div>函数调用：{{ getFullName() }}</div>
+      </div>
+      <div>
+        <div>计算属性：{{ fullName }}</div>
+        <div>函数调用：{{ getFullName() }}</div>
+      </div>
+      <div>
+        <div>计算属性：{{ fullName }}</div>
+        <div>函数调用：{{ getFullName() }}</div>
+      </div>
+
+      <div>
+        <button @click="changeFirstName">修改响应式变量值</button>
+      </div>
+    </div>
+  </body>
+</html>

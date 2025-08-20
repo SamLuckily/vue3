@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+        const { createApp, ref } = Vue
+        window.onload = function () {
+            createApp({
+                setup() {
+                    const classNameA = ref("box")
+                    const classNameB = ref("border")
+                    const baidu = ref("https://www.baidu.com")
+                    const bing = ref("https://cn.bing.com/")
+                    const readonlyState = ref(true)
+                    const size = ref(20)
+                    // 使用响应式变量 定义图像的背景色和边框色 
+                    const colorBorder = ref("background-color:red;border: 5px solid #000");
+                    // 使用响应式对象 定义图像的宽高和位置
+                    const widthHeight = ref({
+                        "width": "100px",
+                        "height": "100px",
+                        "margin-top": "120px"
+
+                    })
+                    return {
+                        classNameA,
+                        classNameB,
+                        baidu,
+                        bing,
+                        readonlyState,
+                        size,
+                        colorBorder,
+                        widthHeight
+
+
+                    }
+                }
+            }).mount("#main")
+        }
+    </script>
+</head>
+
+<body>
+    <div id="main">
+        <!-- 标准格式的属性绑定 -->
+        <div v-bind:class="classNameA">A</div>
+        <!-- 简化格式的属性绑定 -->
+        <div :class="classNameB">B</div>
+        <!-- 绑定单个属性值 -->
+        <div>
+            <a v-bind:href="baidu">百度</a>
+        </div>
+        <div>
+            <a :href="bing">必应</a>
+        </div>
+        <div>
+            <input type="text" value="只读输入框，不能输入内容" :readonly="readonlyState">
+        </div>
+        <div>
+            <input type="text" :size="size"> 输入框的宽度为 {{size}}
+        </div>
+        <!-- 绑定多个值 -->
+        <div style="width:100px;height:100px" :style="colorBorder">AA</div>
+        <div :style="widthHeight" style="background-color:red;border: 5px solid #000">BB</div>
+    </div>
+</body>
+
+</html>

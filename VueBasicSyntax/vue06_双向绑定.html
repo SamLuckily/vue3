@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+      // 导入 Vue 中的 createApp和ref
+      const { createApp, ref } = Vue;
+      // 文本、多行文本
+
+      window.onload = function () {
+        createApp({
+          setup() {
+            // 文本
+            const oneText = ref('None')
+            // 多行文本
+            const mulText = ref('None')
+            const checkState = ref()
+            const checkMul = ref([])
+            const radioState = ref()
+            const selectState = ref(("北京"))
+            function clearText(){
+              oneText.value = ""
+            }
+            return {
+              oneText,
+              mulText,
+              clearText,
+              checkState,
+              checkMul,
+              radioState,
+              selectState
+            };
+          },
+        }).mount("#app");
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 文本 -->
+      <p>
+        <p>输入的单行文本为：
+          {{oneText}}
+        </p>
+        <input v-model="oneText" placeholder="请输入单行文本">
+        <button @click="clearText">清空</button>
+      </p>
+      <div>===================</div>
+      <!-- 多行文本 -->
+      <p>
+        <p>输入的多行文本为：</p>
+        <p style="white-space: pre-line;">{{mulText}}</p>
+        <textarea v-model="mulText"></textarea>
+      </p>
+      <div>===================</div>
+      <!-- 复选框 -->
+      <p>
+        <input type="checkbox" v-model="checkState" />
+        <label >{{ checkState ? '选中状态' : '未选中状态' }}</label>
+      </p>
+      <div>===================</div>
+      <!-- 多选 -->
+      <p>
+        <p>选择喜欢的猫：{{checkMul}}</p>
+        <input type="checkbox" id="buo" value="布偶猫" v-model="checkMul">
+        <label for="buo">布偶猫</label>
+        <input type="checkbox" id="bs" value="英短" v-model="checkMul">
+        <label for="bs">英短</label>
+        <input type="checkbox" id="blue" value="蓝猫" v-model="checkMul">
+        <label for="blue">蓝猫</label>
+        <input type="checkbox" id="sim" value="暹罗猫" v-model="checkMul">
+        <label for="sim">暹罗猫</label>
+      </p>
+      <div>===================</div>
+      <!-- 单选按钮 -->
+      <p>
+        <div>已选：{{radioState}}</div>
+        <input type="radio" id='A' value="A" v-model="radioState">
+        <label for="A">选择A</label>
+        <input type="radio" id='B' value="B" v-model="radioState">
+        <label for="B">选择B</label>
+        <input type="radio" id='C' value="C" v-model="radioState">
+        <label for="C">选择C</label>
+      </p>
+      <div>===================</div>
+      <!-- 选择器 -->
+      <p>
+        <div>已选：{{selectState}}</div>
+        <select v-model="selectState">
+          <option disabled value="">请选择你所在的城市</option>
+          <option>北京</option>
+          <option>上海</option>
+          <option>广州</option>
+          <option>深圳</option>
+        </select>
+      </p>
+      <div>===================</div>
+    </div>
+    
+  </body>
+</html>

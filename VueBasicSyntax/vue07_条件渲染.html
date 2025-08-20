@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+
+      window.onload = function () {
+        createApp({
+          setup() {
+            const flag = ref(false);
+            const flagChar = ref("A");
+
+            function change() {
+              if (flagChar.value == "A") flagChar.value = "B";
+              else if (flagChar.value == "B") flagChar.value = "C";
+              else if (flagChar.value == "C") flagChar.value = "D";
+              else if (flagChar.value == "D") flagChar.value = "A";
+              // alert(flagChar.value);
+            }
+            return {
+              flag,
+              flagChar,
+              change,
+            };
+          },
+        }).mount("#app");
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="flag">
+        <h1>v-if-title</h1>
+        <h1>IF 标题</h1>
+        <p>内容</p>
+        <div>
+          <h3>图片</h3>
+          <h3>图片</h3>
+          <h3>图片</h3>
+        </div>
+      </div>
+      <div>
+        <h1>Else 标题</h1>
+        <div>
+          <h3>图片</h3>
+          <h3>图片</h3>
+        </div>
+      </div>
+      <button @click="flag = !flag">切换</button>
+      <hr />
+      <div v-show="flag">V-SHOW</div>
+
+      <div v-if="flagChar == 'A'">
+        <h1>AAAAA</h1>
+      </div>
+      <div v-else-if="flagChar == 'B'">
+        <h1>BBBBBB</h1>
+      </div>
+      <div v-else-if="flagChar == 'C'">
+        <h1>CCCCC</h1>
+      </div>
+      <div v-else>
+        <h1>DDDDD</h1>
+      </div>
+      <hr />
+      <button @click="change">切换</button>
+    </div>
+  </body>
+</html>

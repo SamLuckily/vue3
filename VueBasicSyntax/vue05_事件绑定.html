@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+      const { createApp, ref } = Vue;
+      window.onload = function () {
+        createApp({
+          setup() {
+            const numA = ref(0);
+            const numB = ref(0);
+            const objStyle = ref({
+                width: "200px",
+                height: "50px",
+                border: "1px solid black",
+                "margin-top": "10px"
+            })
+            function addA() {
+              numA.value++;
+            }
+            function addB(n) {
+              numA.value += n;
+            }
+            return {
+              numA,
+              numB,
+              addA,
+              addB,
+              objStyle
+            };
+          },
+        }).mount("#app");
+      };
+    </script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 绑定内敛处理器 -->
+      <!-- 标准格式 -->
+      <button v-on:click="numA++">NumA ++</button> NumA: {{numA}}
+      <br>
+      <!-- 简化格式 -->
+      <button @click="numB++">NumB ++</button> NumB: {{numB}}
+      <!-- 方法事件处理器 -->
+      <div :style="objStyle" @click="addA">Add A -- NumA: {{numA}}</div>
+      <div :style="objStyle" @click="addB(10)">Add B -- NumB: {{numB}}</div>
+    </div>
+  </body>
+</html>

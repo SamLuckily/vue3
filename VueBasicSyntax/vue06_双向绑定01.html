@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!--用于在事件之后进行同步-->
+      <input type="text" v-model.lazy="lazy" />
+      <h2>{{ lazy }}</h2>
+      <br />
+      <!-- 将用户的输入值转换成数值类型
+        typeof 的作用就是用来区分数据的类型的，这里用来显示 number 这个变量值的类型。-->
+      <input type="text" v-model.number="number" />
+      <h2>{{typeof number}}</h2>
+      <br />
+      <!--自动过滤用户输入的首部和尾部的空白字符-->
+      <input type="text" v-model.trim="trim" />
+      <h2>空格{{ trim }}空格</h2>
+      <br />
+    </div>
+  </body>
+</html>
+<script>
+  const { createApp, ref } = Vue;
+  createApp({
+    data() {
+      return { msg: "", lazy: "", number: "", trim: "" };
+    },
+  }).mount("#app");
+</script>

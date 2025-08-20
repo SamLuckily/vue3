@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script>
+        // 导入createApp 函数
+        const { createApp, ref } = Vue
+        //页面加载完成后再来回调执行的代码
+        window.onload = function () {
+            //创建Vue实例
+            const app = createApp({
+                //程序入口
+                setup() {
+                    const msg1 = "Hello World"
+                    const num1 = 1
+                    const num2 = ref(1)
+                    //定义两个函数，用来修改两个变量的值
+                    function addnum1() {
+                        num1++
+                        console.log(num1)
+                    }
+                    function addnum2() {
+                        num2.value++
+                        console.log(num2.value)
+                    }
+
+                    //返回一个对象，用来暴露数据
+                    return {
+                        msg1,
+                        num1,
+                        num2,
+                        addnum1,
+                        addnum2
+                    }
+                }
+            })
+            //挂载实例
+            app.mount("#app")
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>msg1: {{ msg1 }}</p>
+        <p>num1: {{ num1 }}</p>
+        <p>num2: {{ num2 }}</p>
+        <button @click="addnum1">Num1Add</button>
+        <button @click="addnum2">Num2Add</button>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <!-- 导入 Vue 中的 createApp和ref -->
+    <script>
+        const { createApp, ref } = Vue;
+        const zoo = ref("成都大熊猫繁育研究基地");
+        const huaEge = ref(3);
+        const huaBro = ref("和叶");
+        const number = 100
+        const isOk = ref(false)
+        const msg = "ABCD"
+        const mesA = ref("<h1>{{}}渲染</h1>");
+        const mesB = ref("<h2>v-text渲染</h2>");
+        const mesC = ref("<h3>v-html渲染</h3>");
+
+        function myFunc() {
+            return "这是一个无函数返回值"
+        }
+        function myFunc2(n) {
+            return n * 100
+        }
+
+        window.onload = function () {
+            createApp({
+                setup() {
+                    return {
+                        zoo,
+                        huaEge,
+                        huaBro,
+                        number,
+                        isOk,
+                        msg,
+                        myFunc,
+                        myFunc2,
+                        mesA,
+                        mesB,
+                        mesC
+                    };
+                },
+            }).mount("#app");
+        };
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 添加元素，通过Vue展示数据 -->
+        <div id="app">
+            <p>花花出生在：{{zoo}}</p>
+            <p>花花今年：{{huaEge}} 岁了</p>
+            <p>花花的弟弟叫：{{huaBro}}</p>
+            <p>这是一个算术表达式：{{ number * 100}}</p>
+            <p>这是一个应用布尔值的三目表达式：{{ isOk ? "真的" : "假的"}}</p>
+            <p>无参函数调用：{{ myFunc() }}</p>
+            <p>有参函数调用：{{ myFunc2(6) }}</p>
+            <p>内置函数的调用：{{ msg.split("").reverse().join("") }}</p>
+            <!-- 使用插值表达式显示内容 -->
+            <div>这是插值表达式的内容：{{mesA}}</div>
+            <!-- 使用 v-text 渲染 -->
+            <div v-text="mesB">v-text 渲染</div>
+            <!-- 使用 v-html 渲染 -->
+            <div v-html="mesC">v-html 渲染</div>
+        </div>
+    </div>
+</body>
+
+</html>

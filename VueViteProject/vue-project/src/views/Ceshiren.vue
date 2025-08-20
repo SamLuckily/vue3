@@ -1,0 +1,11 @@
+<template>
+    <div>
+        <h2>Ceshiren</h2>
+        <p>Ceshiren页面内容</p>
+        <p>Ceshiren页面内容</p>
+        <p>Ceshiren页面内容</p>
+        <p>Ceshiren页面内容</p>
+        <p>Ceshiren页面内容</p>
+        <h3>Ceshiren页脚</h3>
+    </div>
+</template>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入 Vue -->
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <!-- 本地文件引入 Vue-->
+    <script src="vue.js"></script>
+
+    <script>
+        // 导入 Vue 中的 createApp 和 ref 函数
+        const { createApp, ref } = Vue
+
+        // 在页面加载完成事件中添加创建Vue实例的方法
+        window.onload = function(){
+            createApp({
+                setup() {
+                    // 定义一个响应式对象
+                    const message = ref('Hello World!')
+                    const msg = ref("Hello Vue!")
+                    const msg2 = ref("Hello")
+                    // 将响应数据返回
+                    return {
+                        message,
+                        msg,
+                        msg2
+                    }
+                }
+            }).mount('#app');
+        }
+
+      </script>
+
+</head>
+<body>
+
+    <!-- 添加元素，通过Vue展示数据 -->
+    <div id="app">
+        <div>
+            {{ message }}
+        </div>
+        <div>
+            {{ msg }}
+        </div>
+        <div>
+            {{ msg2 }}
+        </div>
+    </div>
+    
+
+</body>
+</html>
